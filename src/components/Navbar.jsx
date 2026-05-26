@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const user = useSelector((store) => store.user);
@@ -12,9 +13,9 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         
         {/* Logo */}
-        <h1 className="text-2xl font-bold text-orange-500">
+        <Link to="/" className="text-2xl font-bold text-orange-500">
           devTinder
-        </h1>
+        </Link>
 
         {/* Right Section */}
         {user && (
@@ -23,34 +24,52 @@ const Navbar = () => {
             
             {/* Profile Button */}
             <button
-              onClick={() => setShowMenu(!showMenu)}
-              className="text-3xl text-gray-700 hover:text-black transition"
-
-          >
-            {/* <FaUserCircle /> */}
-            <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-white">
-                <img src={user.profile || "https://via.placeholder.com/150"} alt="Profile" className="w-full h-full cursor-pointer rounded-full object-cover" />
-            </div>
-          </button>
+  onClick={() => setShowMenu(!showMenu)}
+  className="w-10 h-10 rounded-full overflow-hidden"
+>
+  <img
+    src={user.profile || "https://via.placeholder.com/150"}
+    alt="Profile"
+    className="w-full h-full object-cover"
+  />
+</button>
 
           {/* Dropdown Menu */}
           {showMenu && (
-            <div className="absolute right-0 top-12 w-40 bg-white rounded-lg shadow-lg border">
-              <ul className="py-2 text-sm text-gray-700">
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                  Profile
-                </li>
+  <div className="absolute right-0 top-12 w-44 bg-white rounded-lg shadow-lg border">
+    
+    <ul className="py-2 text-sm text-gray-700">
 
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                  Settings
-                </li>
+      <li>
+        <Link
+          to="/profile"
+          className="block px-4 py-2 hover:bg-gray-100"
+        >
+          Profile
+        </Link>
+      </li>
 
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500">
-                  Logout
-                </li>
-              </ul>
-            </div>
-          )}
+      <li>
+        <Link
+          to="/settings"
+          className="block px-4 py-2 hover:bg-gray-100"
+        >
+          Settings
+        </Link>
+      </li>
+
+      <li>
+        <Link
+          to="/logout"
+          className="block px-4 py-2 hover:bg-gray-100 text-red-500"
+        >
+          Logout
+        </Link>
+      </li>
+
+    </ul>
+  </div>
+)}
         </div>
         )}
 
