@@ -8,6 +8,7 @@ import { BASE_URL } from "../utils/constants";
 const Login = () => {
   const [emailID, setEmailId] = useState("akshay@gmail.com");
   const [password, setPassword] = useState("Akshay@123");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,6 +31,7 @@ const Login = () => {
     dispatch(addUser(res.data));
     navigate("/feed");
   } catch (err) {
+    setError("Invalid email or password");
     console.log(err);
   }
 };
@@ -73,6 +75,10 @@ const Login = () => {
             />
           </div>
 
+          <p className="text-red-500 text-sm">
+            {error}
+            </p>
+
           <button
             type="submit"
             className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg transition duration-200"
@@ -83,7 +89,8 @@ const Login = () => {
 
         <p className="text-center text-gray-600 mt-6">
           New here?{" "}
-          <span className="text-orange-500 cursor-pointer hover:underline">
+          <span className="text-orange-500 cursor-pointer hover:underline"
+          onClick={() => navigate("/signup")}>
             Create an account
           </span>
         </p>

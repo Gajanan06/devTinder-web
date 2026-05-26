@@ -1,12 +1,69 @@
-import { useState } from "react";
+import { useState,useRef,useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
+
 
 const Navbar = () => {
     const user = useSelector((store) => store.user);
     // console.log(user);
   const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef();
+
+  useEffect(() => {
+
+  const handleClickOutside = (event) => {
+
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target)
+    ) {
+      setShowMenu(false);
+    }
+
+  };
+
+  document.addEventListener(
+    "mousedown",
+    handleClickOutside
+  );
+
+  return () => {
+    document.removeEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+  };
+
+}, []);
+
+
+const dispatch = useDispatch();
+const navigate = useNavigate();
+
+const handleLogout = async () => {
+
+  try {
+
+    await axios.post(
+      `${BASE_URL}/logout`,
+      {},
+      { withCredentials: true }
+    );
+
+    dispatch(removeUser());
+
+    navigate("/login");
+
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   return (
     <nav className="bg-white shadow-md px-6 py-4">
@@ -19,7 +76,7 @@ const Navbar = () => {
 
         {/* Right Section */}
         {user && (
-          <div className=" flex relative items-center gap-4">
+          <div ref={menuRef} className=" flex relative items-center gap-4">
             <p className="text-gray-700 font-medium">Welcome, {user.firstName} </p>
             
             {/* Profile Button */}
@@ -30,7 +87,7 @@ const Navbar = () => {
   <img
     src={user.profile || "https://via.placeholder.com/150"}
     alt="Profile"
-    className="w-full h-full object-cover"
+    className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-200"
   />
 </button>
 
@@ -62,6 +119,7 @@ const Navbar = () => {
         <Link
           to="/logout"
           className="block px-4 py-2 hover:bg-gray-100 text-red-500"
+          onClick={handleLogout}
         >
           Logout
         </Link>
