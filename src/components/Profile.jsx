@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const user = useSelector((store) => store.user);
@@ -70,11 +71,11 @@ const Profile = () => {
           </div>
 
           {/* Button */}
-          <div className="mt-8 flex justify-center">
+          <Link to="/profile/edit" className="mt-8 flex justify-center">
             <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition duration-200">
               Edit Profile
             </button>
-          </div>
+          </Link>
 
         </div>
       </div>
