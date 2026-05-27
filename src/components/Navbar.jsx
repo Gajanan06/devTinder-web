@@ -11,12 +11,10 @@ import { BASE_URL } from "../utils/constants";
 
 const Navbar = () => {
     const user = useSelector((store) => store.user);
-    // console.log(user);
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef();
 
   useEffect(() => {
-
   const handleClickOutside = (event) => {
 
     if (
@@ -49,7 +47,6 @@ const navigate = useNavigate();
 const handleLogout = async () => {
 
   try {
-
     await axios.post(
       `${BASE_URL}/logout`,
       {},
@@ -57,7 +54,6 @@ const handleLogout = async () => {
     );
 
     dispatch(removeUser());
-
     navigate("/login");
 
   } catch (err) {
@@ -69,17 +65,14 @@ const handleLogout = async () => {
     <nav className="bg-gray-800 shadow-md px-6 py-4">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         
-        {/* Logo */}
         <Link to="/feed" className="text-2xl font-bold text-orange-500">
           devTinder
         </Link>
 
-        {/* Right Section */}
         {user && (
           <div ref={menuRef} className=" flex relative items-center gap-4">
             <p className="text-white font-medium">Welcome, {user.firstName} </p>
             
-            {/* Profile Button */}
             <button
   onClick={() => setShowMenu(!showMenu)}
   className="w-10 h-10 rounded-full overflow-hidden"
@@ -91,7 +84,6 @@ const handleLogout = async () => {
   />
 </button>
 
-          {/* Dropdown Menu */}
           {showMenu && (
   <div className="absolute right-0 top-12 w-44 bg-white rounded-lg shadow-lg border">
     

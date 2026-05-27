@@ -1,57 +1,51 @@
 import { useState } from "react";
-
 import axios from "axios";
-
 import { useDispatch } from "react-redux";
-
 import { useNavigate } from "react-router-dom";
-
 import { addUser } from "../utils/userSlice";
-
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const [isLoginForm, setIsLoginForm] = useState(true);
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailID, setEmailId] = useState("");
   const [password, setPassword] = useState("");
-
   const [error, setError] = useState("");
 
   const handleAuth = async (e) => {
 
     e.preventDefault();
-
     try {
-
       if (isLoginForm) {
 
-        // LOGIN API
-        const res = await axios.post(
-          `${BASE_URL}/login`,
-          {
-            emailID,
-            password,
-          },
-          {
-            withCredentials: true,
-          }
-        );
+        
+        await axios.post(`${BASE_URL}/login`,
+         {
+           emailID,
+         password,
+      },
+      {
+        withCredentials: true,
+     }
+    );
 
-        dispatch(addUser(res.data));
+const userRes = await axios.get(`${BASE_URL}/profile/view`,
+   {
+    withCredentials: true,
+   }
+  );
 
-        navigate("/feed");
+  dispatch(addUser(userRes.data));
+  navigate("/feed");
 
       } else {
 
-        // SIGNUP API
+
         await axios.post(
           `${BASE_URL}/signup`,
           {
@@ -66,14 +60,12 @@ const Login = () => {
         );
 
         setIsLoginForm(true);
-
         setError("");
 
         alert("Account created successfully");
       }
 
     } catch (err) {
-
       setError(err.response?.data || "Something went wrong");
     }
   };
@@ -83,7 +75,6 @@ const Login = () => {
 
       <div className="bg-white w-full max-w-md rounded-2xl shadow-lg p-8">
 
-        {/* Heading */}
         <div className="text-center mb-6">
 
           <h1 className="text-4xl font-bold text-orange-500">
@@ -100,13 +91,11 @@ const Login = () => {
 
         </div>
 
-        {/* Form */}
         <form
           onSubmit={handleAuth}
           className="space-y-5"
         >
 
-          {/* Signup Fields */}
           {!isLoginForm && (
             <>
               <div>
@@ -145,7 +134,6 @@ const Login = () => {
             </>
           )}
 
-          {/* Email */}
           <div>
 
             <label className="block text-gray-700 mb-2">
@@ -163,7 +151,6 @@ const Login = () => {
             />
           </div>
 
-          {/* Password */}
           <div>
 
             <label className="block text-gray-700 mb-2">
@@ -181,14 +168,12 @@ const Login = () => {
             />
           </div>
 
-          {/* Error */}
           {error && (
             <p className="text-red-500 text-sm">
               {error}
             </p>
           )}
 
-          {/* Button */}
           <button
             type="submit"
             className="w-full bg-orange-500 cursor-pointer hover:bg-orange-600 text-white py-2 rounded-lg transition duration-200"
@@ -202,23 +187,21 @@ const Login = () => {
 
         </form>
 
-        {/* Toggle */}
-<div className="text-center pb-2 h-16 flex items-center justify-center">
 
-  {isLoginForm ? (
+        <div className="text-center pb-2 h-16 flex items-center justify-center">
 
-    <p className="text-gray-600 text-sm">
+          {isLoginForm ? (
 
-      New here?
+          <p className="text-gray-600 text-sm">
+           New here?
 
-      <button
-        type="button"
-        onClick={() => {
+        <button
+          type="button"
+          onClick={() => {
           setIsLoginForm(false);
           setError("");
         }}
-        className="text-orange-500 ml-1 hover:underline cursor-pointer font-medium"
-      >
+        className="text-orange-500 ml-1 hover:underline cursor-pointer font-medium">
         Create Account
       </button>
 
@@ -243,9 +226,9 @@ const Login = () => {
 
     </p>
 
-  )}
+    )}
 
-</div>
+    </div>
       </div>
     </div>
   );

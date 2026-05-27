@@ -21,7 +21,6 @@ const Body = () => {
                 withCredentials: true,
             });
             dispatch(addUser(res.data));
-            console.log(res.data);
         } catch (err) {
             if (err.response?.status === 401) {
                 navigate("/login");
@@ -37,15 +36,15 @@ const Body = () => {
     return (
        <div className="min-h-screen bg-gray-200 flex flex-col">
 
-  <Navbar />
+         <Navbar />
 
-  <main className="flex-grow">
-    <Outlet />
-  </main>
+          <main className="flex-grow">
+            <Outlet />
+          </main>
 
-  <Footer />
+         <Footer />
 
-</div>
+       </div>
     );
 }
 

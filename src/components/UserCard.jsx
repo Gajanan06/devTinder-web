@@ -1,20 +1,13 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
-
-import {
-  removeUserFromFeed,
-} from "../utils/feedSlice";
-
+import {removeUserFromFeed,} from "../utils/feedSlice";
 import { BASE_URL } from "../utils/constants";
 
 const UserCard = ({ user }) => {
-
   const dispatch = useDispatch();
 
   const handleFeedAction = async (status, userId) => {
-
     try {
-
       await axios.post(
         `${BASE_URL}/request/send/${status}/${userId}`,
         {},
@@ -29,19 +22,17 @@ const UserCard = ({ user }) => {
       console.log(err);
     }
   };
-  console.log(user);
 
   return (
     <div className="bg-white w-80 rounded-2xl shadow-lg overflow-hidden">
 
-      {/* Profile Image */}
       <img
         src={user.profile || "https://via.placeholder.com/300x400"}
         alt="Profile"
         className="w-full h-80 object-cover"
       />
 
-      {/* User Details */}
+      
       <div className="p-4">
 
         <div className="flex items-center justify-between">
@@ -60,7 +51,7 @@ const UserCard = ({ user }) => {
           {user.gender}
         </p>
 
-        {/* Buttons */}
+        
         <div className="flex gap-3 mt-5">
 
           <button

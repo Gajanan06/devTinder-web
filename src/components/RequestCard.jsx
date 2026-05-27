@@ -1,15 +1,12 @@
 import axios from "axios";
-
 import { BASE_URL } from "../utils/constants";
 
 const RequestCard = ({ request }) => {
 
   const { fromUserId } = request;
-
   const handleReviewRequest = async (status) => {
 
     try {
-
       await axios.post(
         `${BASE_URL}/request/review/${status}/${request._id}`,
         {},
@@ -21,7 +18,6 @@ const RequestCard = ({ request }) => {
       window.location.reload();
 
     } catch (err) {
-
       console.log(err);
     }
   };
@@ -29,7 +25,7 @@ const RequestCard = ({ request }) => {
   return (
     <div className="bg-white rounded-xl shadow-md p-4 flex items-center justify-between">
 
-      {/* Left */}
+      
       <div className="flex items-center gap-4">
 
         <img
@@ -51,7 +47,7 @@ const RequestCard = ({ request }) => {
         </div>
       </div>
 
-      {/* Right */}
+      
       <div className="flex gap-3">
 
         <button

@@ -1,18 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
-
 import { BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
+
 
 const EditProfile = () => {
 
   const user = useSelector((store) => store.user);
-
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState(user.firstName || "");
@@ -20,7 +17,6 @@ const EditProfile = () => {
   const [age, setAge] = useState(user.age || "");
   const [gender, setGender] = useState(user.gender || "");
   const [profile, setProfile] = useState(user.profile || "");
-
   const [error, setError] = useState("");
 
   const handleEditProfile = async (e) => {
@@ -28,7 +24,6 @@ const EditProfile = () => {
     e.preventDefault();
 
     try {
-
       const res = await axios.patch(
         `${BASE_URL}/profile/edit`,
         {
@@ -44,11 +39,9 @@ const EditProfile = () => {
       );
 
       dispatch(addUser(res.data.data));
-
       navigate("/profile");
 
     } catch (err) {
-
       setError(err.response?.data || "Something went wrong");
     }
   };
@@ -67,7 +60,6 @@ const EditProfile = () => {
           className="space-y-5"
         >
 
-          {/* First Name */}
           <div>
             <label className="block text-gray-700 mb-2">
               First Name
@@ -83,7 +75,6 @@ const EditProfile = () => {
             />
           </div>
 
-          {/* Last Name */}
           <div>
             <label className="block text-gray-700 mb-2">
               Last Name
@@ -99,7 +90,6 @@ const EditProfile = () => {
             />
           </div>
 
-          {/* Age */}
           <div>
             <label className="block text-gray-700 mb-2">
               Age
@@ -115,7 +105,6 @@ const EditProfile = () => {
             />
           </div>
 
-          {/* Gender */}
           <div>
             <label className="block text-gray-700 mb-2">
               Gender
@@ -135,7 +124,6 @@ const EditProfile = () => {
             </select>
           </div>
 
-          {/* Profile URL */}
           <div>
             <label className="block text-gray-700 mb-2">
               Profile Image URL
@@ -151,14 +139,12 @@ const EditProfile = () => {
             />
           </div>
 
-          {/* Error */}
           {error && (
             <p className="text-red-500 text-sm">
               {error}
             </p>
           )}
 
-          {/* Button */}
           <button
             type="submit"
             className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg transition duration-200"

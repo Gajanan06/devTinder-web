@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 import ConnectionCard from "../components/ConnectionCard";
-
 import { BASE_URL } from "../utils/constants";
 
-const Connections = () => {
 
+const Connections = () => {
   const [connections, setConnections] = useState([]);
 
   const fetchConnections = async () => {
-
     try {
-
       const res = await axios.get(
         `${BASE_URL}/user/connections`,
         {
@@ -23,7 +19,6 @@ const Connections = () => {
       setConnections(res.data);
 
     } catch (err) {
-
       console.log(err);
     }
   };
