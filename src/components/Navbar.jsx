@@ -54,6 +54,7 @@ const handleLogout = async () => {
     );
 
     dispatch(removeUser());
+    setShowMenu(false);
     navigate("/login");
 
   } catch (err) {
@@ -91,6 +92,7 @@ const handleLogout = async () => {
 
       <li>
         <Link
+          onClick={() => setShowMenu(false)}
           to="/profile"
           className="block px-4 py-2 hover:bg-gray-100"
         >
@@ -101,6 +103,7 @@ const handleLogout = async () => {
       <li>
         <Link
           to="/requests"
+          onClick={() => setShowMenu(false)}
           className="block px-4 py-2 hover:bg-gray-100"
         >
           Requests
@@ -109,6 +112,7 @@ const handleLogout = async () => {
 
       <li>
   <Link
+    onClick={() => setShowMenu(false)}
     to="/connections"
     className="block px-4 py-2 hover:bg-gray-100"
   >
@@ -118,9 +122,11 @@ const handleLogout = async () => {
 
       <li>
         <Link
-          to="/logout"
           className="block px-4 py-2 hover:bg-gray-100 text-red-500"
-          onClick={handleLogout}
+          onClick={() => {
+            setShowMenu(false);
+            handleLogout();
+          }}
         >
           Logout
         </Link>

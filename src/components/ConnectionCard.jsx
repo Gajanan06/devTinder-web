@@ -15,9 +15,13 @@ const ConnectionCard = ({ connection }) => {
           {connection.firstName} {connection.lastName}
         </h2>
 
-        <p className="text-gray-600 mt-1">
-          {connection.age}, {connection.gender}
-        </p>
+        {(connection.age || connection.gender) && (
+         <p className="text-gray-600 mt-1">
+           {connection.age && `${connection.age}`}
+           {connection.age && connection.gender && ", "}
+           {connection.gender && connection.gender}
+         </p>
+        )}
 
       </div>
     </div>
