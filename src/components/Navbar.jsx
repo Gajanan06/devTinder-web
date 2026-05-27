@@ -66,7 +66,7 @@ const handleLogout = async () => {
 };
 
   return (
-    <nav className="bg-white shadow-md px-6 py-4">
+    <nav className="bg-gray-800 shadow-md px-6 py-4">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         
         {/* Logo */}
@@ -77,7 +77,7 @@ const handleLogout = async () => {
         {/* Right Section */}
         {user && (
           <div ref={menuRef} className=" flex relative items-center gap-4">
-            <p className="text-gray-700 font-medium">Welcome, {user.firstName} </p>
+            <p className="text-white font-medium">Welcome, {user.firstName} </p>
             
             {/* Profile Button */}
             <button
