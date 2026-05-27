@@ -70,7 +70,7 @@ const handleLogout = async () => {
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-orange-500">
+        <Link to="/feed" className="text-2xl font-bold text-orange-500">
           devTinder
         </Link>
 
@@ -114,6 +114,15 @@ const handleLogout = async () => {
           Requests
         </Link>
       </li>
+
+      <li>
+  <Link
+    to="/connections"
+    className="block px-4 py-2 hover:bg-gray-100"
+  >
+    Connections
+  </Link>
+</li>
 
       <li>
         <Link

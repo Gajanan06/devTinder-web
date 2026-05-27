@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 import RequestCard from "../components/RequestCard";
-
 import { BASE_URL } from "../utils/constants";
 
-const Requests = () => {
 
+const Requests = () => {
   const [requests, setRequests] = useState([]);
 
   const fetchRequests = async () => {
-
     try {
-
       const res = await axios.get(
         `${BASE_URL}/user/requests/received`,
         {
@@ -23,7 +19,6 @@ const Requests = () => {
       setRequests(res.data);
 
     } catch (err) {
-
       console.log(err);
     }
   };
